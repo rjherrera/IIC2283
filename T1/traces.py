@@ -1,3 +1,8 @@
+import sys
+
+sys.setrecursionlimit(6000)
+
+
 def traces(n, heights):
     if n == 0 or heights.count(0) == n:
         return 0
