@@ -7,7 +7,7 @@ def ncr(n, r):
     return factorial(n) // (factorial(r) * factorial(n - r))
 
 
-def friendly_permutations(n):
+def friendly_naive(n):
     N = len(n)
     F = [n.count(str(i)) for i in range(10)]
     P = ceil(N / 2)  # mandando ceil(N/2) a los pares
@@ -40,6 +40,14 @@ def friendly_permutations(n):
                     next_dp = DP[k + 1][new_p][new_x]
                     DP[k][p][x] += ways_of_even * ways_of_odd * next_dp
     return DP[0][P][0]
+
+
+def friendly_permutations(n):
+    if '0' in n:
+        x = friendly_naive(n) - friendly_naive(n.replace('0', '', 1))
+    else:
+        x = friendly_naive(n)
+    return x % (10 ** 9 + 7)
 
 
 if __name__ == '__main__':
