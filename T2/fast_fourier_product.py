@@ -1,4 +1,4 @@
-import cmath
+from cmath import exp, pi
 
 
 def closest_power_of_2(n):
@@ -16,13 +16,14 @@ def fft(n, a):
     half = n // 2
     y_even = fft(half, a[0::2])
     y_odd = fft(half, a[1::2])
-    y = [0] * n
+    y = [None] * n
 
-    pi_2j_over_n = cmath.pi / n * -2j
+    pi_2j_over_n = pi / n * -2j
     for k in range(half):
-        x = cmath.exp(pi_2j_over_n * k) * y_odd[k]
-        y[k] = y_even[k] + x
-        y[half + k] = y_even[k] - x
+        x = exp(pi_2j_over_n * k) * y_odd[k]
+        y_even_k = y_even[k]
+        y[k] = y_even_k + x
+        y[half + k] = y_even_k - x
     return y
 
 
@@ -39,9 +40,7 @@ def product(p, q):
     pre_prod = unordered_pre_prod[:1] + unordered_pre_prod[:0:-1]
 
     prod = [round((i / size).real) for i in fft(size, pre_prod)]
-    while prod and prod[-1] == 0:
-        prod.pop()
-    return prod
+    return prod[:n_p + n_q - 1]
 
 
 if __name__ == '__main__':
@@ -53,4 +52,4 @@ if __name__ == '__main__':
     q_degree, *q = [int(i) for i in input().split()]
 
     answer = product(p, q)
-    print(max(0, len(answer) - 1), str(answer).replace(',', '')[1:-1])
+    print(p_degree + q_degree, str(answer).replace(',', '')[1:-1])
