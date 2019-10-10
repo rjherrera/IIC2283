@@ -10,7 +10,14 @@ def enlarge(array, n, item=0):
 
 
 def fft(n, a):
-    if n == 2:
+    if n == 4:
+        w_1 = exp(pi / n * -2j)
+        a0, a1, a2, a3 = a
+        return [a0 + a2 + a1 + a3,
+                a0 - a2 + w_1 * (a1 - a3),
+                a0 + a2 - a1 - a3,
+                a0 - a2 - w_1 * (a1 - a3)]
+    elif n == 2:
         return [a[0] + a[1], a[0] - a[1]]
 
     half = n // 2
