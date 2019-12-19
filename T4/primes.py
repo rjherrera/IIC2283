@@ -59,6 +59,8 @@ def small_prime(n):
     return n in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
 
+# based on
+# http://marenas.sitios.ing.uc.cl/iic2283-19/clases/alg_teoria_numeros-2-imp.pdf#page=31
 def prime(n):
     if n < 50:
         return small_prime(n)
