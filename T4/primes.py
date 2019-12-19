@@ -2,14 +2,14 @@ from math import floor, ceil, log2
 from random import randint
 
 
-def mcd(a, b):
+def gcd(a, b):
     if a == 0:
         return b
     if b == 0:
         return a
     if a >= b:
-        return mcd(b, a % b)
-    return mcd(a, b % a)
+        return gcd(b, a % b)
+    return gcd(a, b % a)
 
 
 def exp(n, k):
@@ -71,7 +71,7 @@ def prime(n):
     a = [randint(1, n - 1) for _ in range(k)]
     b = [0] * k
     for i in range(min(n - 1, k)):
-        if mcd(a[i], n) > 1:
+        if gcd(a[i], n) > 1:
             return False
         b[i] = exp_mod(a[i], (n - 1) // 2, n)
     neg = 0
