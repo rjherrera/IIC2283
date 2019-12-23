@@ -22,9 +22,12 @@ def bezout_numbers(s, t, m):
     x_generalizer = -t // gcd
     y_generalizer = s // gcd
 
-    n = 1  # choose n to get minimum diophantine solution for s·a + t·b = m
+    # choose n to get minimum diophantine solution for s·a + t·b = m
     # as general diphantine sol: x = x0 - t // gcd · n, y = y0 + s // gcd · n
+    n = min(abs(x0 // x_generalizer), abs(y0 // y_generalizer))
+
     if x0 > 0 and y0 > 0:
+        n = -n
         while x0 + n * x_generalizer > 0 and y0 + n * y_generalizer > 0:
             n -= 1
     else:
